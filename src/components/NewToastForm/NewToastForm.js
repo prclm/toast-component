@@ -13,13 +13,19 @@ const INIT_FORM = {
 };
 
 function NewToastForm() {
+  const initFocusRef = React.useRef();
   const [form, setForm] = React.useState(INIT_FORM);
   const { addToast } = React.useContext(ToastContext);
   const handleNewToast = (e) => {
     e.preventDefault();
     addToast({ ...form, id: new Date().getTime() });
     setForm(INIT_FORM);
+    initFocusRef.current.focus();
   };
+
+  React.useEffect(() => {
+    initFocusRef.current.focus();
+  }, [initFocusRef]);
   return (
     <form className={styles.controlsWrapper} onSubmit={handleNewToast}>
       <div className={styles.row}>
@@ -32,6 +38,7 @@ function NewToastForm() {
         </label>
         <div className={styles.inputWrapper}>
           <textarea
+            ref={initFocusRef}
             required
             id="message"
             className={styles.messageInput}

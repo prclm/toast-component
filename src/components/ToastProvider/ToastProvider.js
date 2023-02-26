@@ -15,6 +15,22 @@ function ToastProvider({ children }) {
     });
   }, []);
 
+  React.useEffect(() => {
+    const removeToastOnEscape = (e) => {
+      if (e.code === "Escape") {
+        setToasts((toasts) => {
+          const nextToasts = [...toasts];
+          nextToasts.shift();
+          return nextToasts;
+        });
+      }
+    };
+    document.addEventListener("keydown", removeToastOnEscape);
+    return () => {
+      document.removeEventListener("keydown", removeToastOnEscape);
+    };
+  }, []);
+
   return (
     <ToastContext.Provider value={{ toasts, addToast, removeToast }}>
       {children}

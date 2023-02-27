@@ -53,20 +53,20 @@ function NewToastForm() {
       <div className={styles.row}>
         <div className={styles.label}>Variant</div>
         <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-          {VARIANT_OPTIONS.map((variant, i) => (
-            <label key={variant} htmlFor={`variant-${variant}`}>
+          {VARIANT_OPTIONS.map((option, i) => (
+            <label key={option} htmlFor={`variant-${option}`}>
               <input
                 required
-                id={`variant-${variant}`}
+                id={`variant-${option}`}
                 type="radio"
                 name="variant"
-                value={variant}
-                checked={variant === form.variant}
+                value={option}
+                checked={option === form.variant}
                 onChange={(e) => {
                   setForm({ ...form, variant: e.target.value });
                 }}
               />
-              {variant}
+              {option}
             </label>
           ))}
         </div>
